@@ -6,7 +6,7 @@ int find(int x, vector<int>& pais) {
     if (pais[x] == x) {
         return x; //chefe de si mesmo
     }
-    return pais[x] = find(pais[x], pais); 
+    return pais[x] = find(pais[x], pais); //MUITO IMPORTANTE
 }
 
 //função que une grupos e u e v
