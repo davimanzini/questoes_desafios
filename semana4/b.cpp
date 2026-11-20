@@ -6,25 +6,32 @@ int main(){
     cin.tie(0);
     ios_base::sync_with_stdio(0);
     
-    string x = "";
     int dinheiro;
     cin >> dinheiro;
-    int menor = 1e7;
-    vector<int> valores;
-    for(int i = 0; i < 9; ++i){
-        int currVal;
-        cin >> currVal;
-        valores[i] = currVal;
-        if(currVal < menor) menor = currVal;
+
+    vector<int> precos(10);
+    int menorCusto = 987654321;
+
+    for(int i = 1; i <= 9; ++i){
+        
+        cin >> precos[i];
+        if(precos[i] < menorCusto) menorCusto = precos[i];
     }
-    int j = 8;
-    int maxAlgs = dinheiro / 2;
-    for(int i = 0; i < maxAlgs; ++i){
-        while(dinheiro < valores[j] || dinheiro - valores[j] < (maxAlgs - i) * menor){
-            j--;
+
+    int maxOperacoes = dinheiro / menorCusto;
+
+    string valorAtual = "";
+    int i = 9;
+    while(i >= 1 && dinheiro > 0){
+
+        int possivelDinheiro = dinheiro - precos[i];
+        if (possivelDinheiro >= 0 && possivelDinheiro / menorCusto == maxOperacoes - 1) {
+            dinheiro = possivelDinheiro;
+            valorAtual += char(i + '0');
+            maxOperacoes--;
+        } else {
+            i--;
         }
-        dinheiro - valores[j];
-        x += to_string(j + 1);
     }
-    cout << x << "\n";
+    cout << valorAtual << '\n';
 }
